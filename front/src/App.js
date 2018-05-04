@@ -1,10 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Calc from "./Calc";
-class App extends Component {
-  render() {
-    return (
+import { Provider, connect } from "react-redux";
+import store from "./store";
+
+const App = () => {
+  return (
+    <Provider store={store}>
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -15,8 +18,8 @@ class App extends Component {
         </p>
         <Calc />
       </div>
-    );
-  }
-}
+    </Provider>
+  );
+};
 
 export default App;
