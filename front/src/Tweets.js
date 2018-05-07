@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { setSearchTerm } from "./actionCreators";
 import { connect } from "react-redux";
 import getAPIDetails from "./asyncActions";
+import axios from "axios";
 
 const Button = styled.input`
   font-size: 1em;
@@ -20,20 +21,15 @@ const Input = styled.input`
   border-radius: 3px;
 `;
 class Tweets extends Component {
-  componentDidMount() {
-    console.log("didmount");
-    console.log(this.props.getAPIData());
-
-    this.props.getAPIData();
-  }
+  componentDidMount() {}
   getTweets(e) {
     e.preventDefault();
-    console.log("asd");
+    this.props.getAPIData();
   }
   render() {
     return (
       <div>
-        <form onSubmit={this.getTweets}>
+        <form onSubmit={e => this.getTweets(e)}>
           <Input
             type="text"
             onChange={this.props.handleSearchTermChange}
@@ -49,8 +45,8 @@ class Tweets extends Component {
 }
 
 export default connect(
-  state => ({ searchTerm: state.searchTerm, apiData: state.apiData.name }),
-  (dispatch, ownProps) => ({
+  state => ({ searchTerm: state.searchTerm, apiData: state.apiData.data }),
+  dispatch => ({
     handleSearchTermChange(event) {
       dispatch(setSearchTerm(event.target.value));
     },

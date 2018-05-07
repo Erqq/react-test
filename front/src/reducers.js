@@ -15,12 +15,11 @@ const searchTerm = (state = "", action) => {
   }
   return state;
 };
-const apiData = (state = {}, action) => {
+const apiData = (state = "", action) => {
   if (action.type === ADD_API_DATA) {
-    return Object.assign({}, state, {
-      [action.payload.imdbID]: action.payload
-    });
+    return action.payload;
   }
+
   return state;
 };
 const rootReducer = combineReducers({ numberInc, searchTerm, apiData });

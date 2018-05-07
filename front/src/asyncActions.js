@@ -1,12 +1,14 @@
 import axios from "axios";
 import { addAPIData } from "./actionCreators";
 
-export default function getAPIDetails(username) {
+export default function getAPIDetails() {
   return dispatch => {
     axios
       .get(`http://localhost:3001/tweets`)
       .then(response => {
-        dispatch(addAPIData(response.data));
+        console.log(response);
+
+        dispatch(addAPIData(response));
       })
       .catch(error => {
         console.error("axios error", error);
