@@ -2,7 +2,8 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Calc from "./Calc";
-import { Provider, connect } from "react-redux";
+import Tweets from "./Tweets";
+import { Provider } from "react-redux";
 import store from "./store";
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <Calc />
+        <Tweets />
       </div>
     </Provider>
   );

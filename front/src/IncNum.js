@@ -1,6 +1,4 @@
 import React from "react";
-
-import * as actions from "./actionCreators";
 import { connect } from "react-redux";
 
 const IncNum = props => {
