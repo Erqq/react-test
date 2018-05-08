@@ -21,16 +21,29 @@ const Input = styled.input`
   border-radius: 3px;
 `;
 class Tweets extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    console.log("tweets mounted");
+  }
   getTweets(e) {
     e.preventDefault();
     console.log(this.props.searchTerm);
 
     this.props.getAPIData(this.props.searchTerm);
   }
+
+  addToDB() {
+    console.log("addtoDB");
+    axios
+      .get("http://localhost:3001/tweetstodb?username=" + this.props.searchTerm)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.error("axios error", error);
+      });
+  }
   render() {
     const { apiData } = this.props;
-    console.log(apiData);
 
     return (
       <div>
@@ -41,12 +54,18 @@ class Tweets extends Component {
             value={this.props.searchTerm}
             placeholder="search"
           />
+          <Button
+            type="button"
+            onClick={e => this.addToDB(e)}
+            value="Add to db"
+          />
           <Button type="submit" value="Search" />
         </form>
 
         <div>
+          <h1>Tweets by {this.props.searchTerm}</h1>
           {apiData.map(tweet => {
-            return <h1 key={tweet.id}>{tweet.text}</h1>;
+            return <h2 key={tweet.id}>{tweet.text}</h2>;
           })}
         </div>
       </div>
