@@ -24,9 +24,14 @@ class Tweets extends Component {
   componentDidMount() {}
   getTweets(e) {
     e.preventDefault();
-    this.props.getAPIData();
+    console.log(this.props.searchTerm);
+
+    this.props.getAPIData(this.props.searchTerm);
   }
   render() {
+    const { apiData } = this.props;
+    console.log(apiData);
+
     return (
       <div>
         <form onSubmit={e => this.getTweets(e)}>
@@ -38,7 +43,12 @@ class Tweets extends Component {
           />
           <Button type="submit" value="Search" />
         </form>
-        <div>{this.props.apiData}</div>
+
+        <div>
+          {apiData.map(tweet => {
+            return <h1 key={tweet.id}>{tweet.text}</h1>;
+          })}
+        </div>
       </div>
     );
   }
@@ -50,8 +60,8 @@ export default connect(
     handleSearchTermChange(event) {
       dispatch(setSearchTerm(event.target.value));
     },
-    getAPIData() {
-      dispatch(getAPIDetails());
+    getAPIData(username) {
+      dispatch(getAPIDetails(username));
     }
   })
 )(Tweets);

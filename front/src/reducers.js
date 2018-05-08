@@ -15,11 +15,21 @@ const searchTerm = (state = "", action) => {
   }
   return state;
 };
-const apiData = (state = "", action) => {
-  if (action.type === ADD_API_DATA) {
-    return action.payload;
-  }
 
+const apiDataInitialState = {
+  data: []
+};
+const apiData = (state = apiDataInitialState, action) => {
+  if (action.type === ADD_API_DATA) {
+    return {
+      ...state,
+      data: action.payload.data
+    };
+
+    // Object.assign({}, state, {
+    //  [action.payload.apiData]: action.payload
+    //});
+  }
   return state;
 };
 const rootReducer = combineReducers({ numberInc, searchTerm, apiData });
